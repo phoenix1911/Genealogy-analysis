@@ -52,6 +52,37 @@ public class CorpDao {
 		}
 		return result;
 	}
+	
+	/**
+	 * 实现从MongoDB 数据库中获取所查询企业名称中包含指定关键字的企业名称，并将其信息保存到相应的实例化对象中
+	 * @param regist_num
+	 * @return
+	 */
+	public List<Corp> corplist(String keyword) {
+		
+		List<Corp> data = new ArrayList<Corp>();
+		List<Corp> data_info = new ArrayList<Corp>();
+		Gson gson = new Gson();
+
+		MongoCollection<Document> collection = MongoDBUtil.getConnection("t_corp_info");
+
+		collection.find().forEach(printBlock);
+
+		for (int i = 0; i < list.size(); i++) {
+			list.set(i, "{" + list.get(i).substring(list.get(i).indexOf("\"c_name\""),
+					list.get(i).indexOf("\"outputValue\"") - 2) + "}");
+			Corp corp = gson.fromJson(list.get(i), Corp.class);
+			data.add(corp);
+		}
+		list.clear();
+		
+		for (Corp corp_info : data) {
+			if (corp_info.getC_name().contains(keyword)) {
+				data_info.add(corp_info);
+			}
+		}
+		return data_info;
+	}
 
 	/**
 	 * 实现从MongoDB 数据库中获取所查询企业的基本信息，并将其信息保存到相应的实例化对象中

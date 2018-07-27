@@ -114,7 +114,7 @@ $.ajax({
 						<div class="jlform wow fadeInUp" data-wow-duration="1.5s"
 							data-wow-delay="3s">
 							<form class="form-inline" role="form"
-								action="GetCorpInfoServlet.com" method="get">
+								action="GetCorpListServlet.com" method="get">
 								<div class="form-group">
 									<label class="sr-only">搜索框</label> <input type="text"
 										id="company_name" name="company_name"
