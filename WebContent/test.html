@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<link rel="stylesheet" href="css/default/easyui.css">
+<link rel="stylesheet" href="css/icon.css">
+
+<script src="js/echarts.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.easyui.min.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/MyYmdhm.js"></script>
+
+<link rel="stylesheet" href="css/jquery.autocomplete.css" type="text/css" />
+<script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
+
+<script type="text/javascript">
+	
+	
+	
+	$.ajax({
+		url : 'GetCorpNameServlet.com',
+		type : 'GET',
+		dataType : 'text',
+		timeout : 2000,
+		error : function() {
+			$.messager.alert("错误", "执行错误");
+		}, //错误执行方法
+		success : function(result) {
+			/* var company_name = ["江苏星网软件有限公司","江苏星网供应链有限公司","山西宇皓环保纸业有限公司","山西宇之蓝农业开发有限公司","常州杰普机械有限公司","无锡市华雁密封件轴承有限公司","华迪计算机集团有限公司","北京航天世纪投资咨询有限公司","华迪钢业集团有限公司","石狮市华迪服饰有限公司","航天信息股份有限公司"];
+ */			
+			var company_name = result;
+
+ 			var name = result;
+			alert(name);
+			alert(company_name);
+			
+			$().ready(function() {
+				$("#company_name").autocomplete(company_name, {
+					max : 12, //列表里的条目数  
+					width : 400, //提示的宽度，溢出隐藏  
+					scrollHeight : 120, //提示的高度，溢出显示滚动条  
+					matchContains : false, //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示  
+					autoFill : false
+				//是否自动填充  
+				});
+			});
+		}
+	})
+	
+</script>
+</head>
+
+<body>
+	<p>
+		<label>自动提示:</label> <input type="text" id="company_name" />
+	</p>
+
+
+
+</body>
+</html>

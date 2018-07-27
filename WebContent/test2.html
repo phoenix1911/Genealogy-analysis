@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/jquery.autocomplete.css" type="text/css" />
+<script type="text/javascript" src="js/jQuery.js"></script>
+<script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
+
+<script type="text/javascript">
+
+$.ajax({
+	url : 'GetCorpNameServlet.com',
+	type : 'GET',
+	dataType : 'text',
+	timeout : 2000,
+	error : function() {
+		$.messager.alert("错误", "执行错误");
+	}, //错误执行方法
+	success : function(result) {
+		alert(result);
+		var company_name = (new Function("", "return " + result))();;
+		$().ready(function() {
+			$("#company_name").autocomplete(company_name, {
+				max : 12, //列表里的条目数  
+				width : 400, //提示的宽度，溢出隐藏  
+				scrollHeight : 120, //提示的高度，溢出显示滚动条  
+				matchContains : false, //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示  
+				autoFill : false
+			//是否自动填充  
+			});
+		});
+	}
+})
+
+	
+</script>
+</head>
+
+<body>
+	<p>
+		<label>自动提示:</label> <input type="text" id="company_name" />
+	</p>
+</body>
+</html>
